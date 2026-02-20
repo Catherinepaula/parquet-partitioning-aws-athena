@@ -1,16 +1,14 @@
 # AWS Data Lake Project – Parquet Partitioning with Athena
 
-## 📌 Project Overview
+## 📌 Visão Geral
 
-This project demonstrates a data persistence workflow using columnar storage (Parquet) and partitioning strategies in AWS.
+Este projeto demonstra a implementação de um fluxo completo de persistência e consulta de dados em ambiente cloud utilizando serviços da AWS e técnicas de otimização baseadas em armazenamento colunar.
 
-The dataset was processed using Pandas and persisted in both CSV and Parquet formats. The Parquet files were compressed using Snappy and partitioned by `reference_date`.
-
-The data was uploaded to Amazon S3 and queried using Amazon Athena through an external table.
+O conjunto de dados foi processado com Pandas e persistido em formato Parquet, com compressão Snappy e particionamento por data, visando otimização de performance em consultas analíticas.
 
 ---
 
-## 🛠 Technologies Used
+## 🛠 Tecnologias Utilizadas
 
 - Python
 - Pandas
@@ -21,29 +19,43 @@ The data was uploaded to Amazon S3 and queried using Amazon Athena through an ex
 
 ---
 
-## ⚙️ Workflow
+## ⚙️ Etapas do Projeto
 
-1. Data ingestion with Pandas  
-2. Column normalization  
-3. Creation of partition column (`reference_date`)  
-4. Data persistence in CSV and Parquet  
-5. Upload to S3  
-6. External table creation in Athena  
-7. Partition repair (`MSCK REPAIR TABLE`)  
-8. Query validation  
-
----
-
-## 🚀 Key Concepts
-
-- Columnar storage (Parquet)
-- Data partitioning
-- Serverless SQL querying
-- Data lake fundamentals
-- Query performance optimization
+1. Ingestão e leitura do dataset em DataFrame Pandas  
+2. Padronização dos nomes das colunas  
+3. Conversão de tipos de dados  
+4. Criação da coluna `reference_date` para particionamento  
+5. Persistência dos dados em:
+   - CSV (formato orientado a linha)
+   - Parquet (formato orientado a coluna, compressão Snappy)
+6. Particionamento dos arquivos por `reference_date`
+7. Upload do dataset particionado para Amazon S3
+8. Criação de tabela externa no Amazon Athena
+9. Atualização das partições com `MSCK REPAIR TABLE`
+10. Execução de consultas SQL para validação
 
 ---
 
-## 📊 Architecture
+## 🧠 Conceitos Aplicados
 
-Data → Pandas → Parquet (Partitioned) → S3 → Athena → SQL
+- Armazenamento colunar (Parquet)
+- Compressão de dados
+- Estratégias de particionamento
+- Arquitetura de Data Lake
+- Integração entre Amazon S3 e Amazon Athena
+- Consultas serverless
+- Otimização de performance em workloads analíticos
+
+---
+
+## 🚀 Resultados
+
+A integração entre Amazon S3 e Amazon Athena foi validada com sucesso, com reconhecimento correto das partições e execução eficiente das consultas SQL.
+
+O particionamento por `reference_date` permitiu que as consultas fossem realizadas de maneira mais otimizada, reduzindo o volume de dados escaneados.
+
+---
+
+## 📊 Arquitetura Simplificada
+
+Data → Pandas → Parquet (Particionado) → Amazon S3 → Amazon Athena → SQL
